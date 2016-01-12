@@ -1,2 +1,3 @@
-# todo-list
-Todo LIst
+# Todo list
+
+Una lista de TODO
