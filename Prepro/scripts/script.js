@@ -2,10 +2,14 @@
 document.addEventListener('DOMContentLoaded', function(){
 
    // Declaracion de Variables
-   var $btnAdd = document.querySelector('.btnAdd');
-   var $ulList = document.querySelector('.Listado__ul');
-   var $inputText = document.querySelector('.inputText');
+   var $btnAdd, $ulList, $inputText;
 
+   actualizarVariables();
+   function actualizarVariables(){
+      $btnAdd = document.querySelector('.btnAdd');
+      $ulList = document.querySelector('.Listado__ul');
+      $inputText = document.querySelector('.inputText');
+   }
 
    // Click al btnAdd
    $btnAdd.addEventListener("click", agregarLi);
@@ -19,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
    function agregarLi(){
       // Capturar el texto del input
-      $inputText = document.querySelector('.inputText');
+      actualizarVariables();
 
       // escribir dentro de un <li>
       $ulList.innerHTML = $ulList.innerHTML + '<li>' + $inputText.value + '</li>';
@@ -32,22 +36,50 @@ document.addEventListener('DOMContentLoaded', function(){
 
       // focalizar en el inputs
       $inputText.focus();
-   }
 
 
-   function agregarTodosLi(){
-      var tmp = document.querySelectorAll('.Listado__ul > li');
-      var tmpLength = tmp.length - 1;
+      function agregarTodosLi(){
+         var tmp = document.querySelectorAll('.Listado__ul > li');
+         var tmpLength = tmp.length - 1;
 
-      for (var i = 0; i <= tmpLength; i++) {
-         agregarCLick(tmp[i]);
-      }
+         for (var i = 0; i <= tmpLength; i++) {
+            agregarCLick(tmp[i]);
+         }
+      };
+
+      // el = "elemento <li>"
+      function agregarCLick(el){
+         el.addEventListener("click",function(){
+            el.classList.toggle('tachado');
+         });
+      };
    };
 
 
-   function agregarCLick(el){
-      el.addEventListener("click",function(){
-         el.classList.toggle('tachado');
-      });
-   };
+   // function filtrarLi(){
+   //    var $lis;
+   //    var $lisJson = {
+   //       "activo" : [],
+   //       "tachado" : []
+   //    };
+   //
+   //
+   //    // Leer todos los <li>
+   //    leerLi();
+   //
+   //    // Guardar los <li> en formato Json
+   //    guardarLi();
+   //
+   //    // Limpiar el <ul>
+   //    limpiarUl();
+   //
+   //    // Agregar los <li> correspondientes
+   //    agregarLi();
+   //
+   //
+   //    function leerLi(){
+   //       // actualizarVariables();
+   //       $lis = document.querySelectorAll('.Listado__ul > li');
+   //    }
+   // }
 });
