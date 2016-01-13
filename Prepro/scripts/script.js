@@ -4,12 +4,18 @@ document.addEventListener('DOMContentLoaded', function(){
    // Declaracion de Variables
    var $btnAdd = document.querySelector('.btnAdd');
    var $ulList = document.querySelector('.Listado__ul');
-   var $inputText;
-   
+   var $inputText = document.querySelector('.inputText');
 
-   // Click del btnAdd
+
+   // Click al btnAdd
    $btnAdd.addEventListener("click", agregarLi);
-
+   // enter al inputText
+   $inputText.addEventListener("keydown", function(e){
+      var keyCode = e.keyCode || e.which;
+      if (keyCode == '13'){
+         agregarLi();
+      }
+   });
 
    function agregarLi(){
       // Capturar el texto del input
