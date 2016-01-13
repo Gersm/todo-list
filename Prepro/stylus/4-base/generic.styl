@@ -1,0 +1,33 @@
+// Estilos Genericos
+//  ---------------------------------------------------------------------------
+
+html,
+body
+	height: 100%
+	overflow-x: hidden
+
+body{
+	width: 100%
+	overflow-y: auto
+
+	font-size: $base['font-size']
+	color: $base['color-text']
+	background: $base['color-background']
+}
+
+a
+	color: $base['color-link']
+	text-decoration none
+	&:hover
+		color: $base['color-hover']
+
+		// // subrayado cuando el cursor pasa por encima
+		// text-decoration underline
+
+video,
+audio,
+embed,
+object,
+input,
+iframe
+	max-width: 100%

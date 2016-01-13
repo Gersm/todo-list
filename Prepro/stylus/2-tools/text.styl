@@ -1,0 +1,18 @@
+//  Cambiar el Texto
+//  ---------------------------------------------------------------------------
+texto($tmp1 = "mayuscula", $tmp2 = "negrita", $tmp3 = "normal")
+
+   if $tmp1 == "mayuscula" or $tmp2 == "mayuscula" or $tmp3 == "mayuscula"
+      text-transform: uppercase
+
+   if $tmp1 == "minuscula" or $tmp2 == "minuscula" or $tmp3 == "minuscula"
+      text-transform: lowercase
+
+   if $tmp1 == "primera" or $tmp2 == "primera" or $tmp3 == "primera"
+      text-transform: capitalize
+
+   if $tmp1 == "cursiva" or $tmp2 == "cursiva" or $tmp3 == "cursiva"
+      font-style: italic
+
+   if $tmp1 == "negrita" or $tmp2 == "negrita" or $tmp3 == "negrita"
+      font-weight: bold

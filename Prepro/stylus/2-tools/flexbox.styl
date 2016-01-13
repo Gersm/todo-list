@@ -1,0 +1,12 @@
+//  Agregar Display flex
+//  ---------------------------------------------------------------------------
+flexbox($direccion = row,  $justificar = center, $alineacion = center, $wrap = nowrap)
+   display: flex
+   flex-direction: $direccion
+   justify-content: $justificar
+   flex-wrap: $wrap
+
+   if $wrap == nowrap
+      align-items: $alineacion
+   else
+      align-content: $alineacion

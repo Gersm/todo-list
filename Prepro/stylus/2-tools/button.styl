@@ -1,0 +1,17 @@
+//  Mejorar estilos de los botones
+//  ---------------------------------------------------------------------------
+boton()
+   background-color transparent
+   cursor pointer
+   outline none
+   padding 0.75em 1em
+   text-decoration none
+
+   border: $base['border-width'] solid $base['border-color']
+   border-radius: $base['border-radius']
+
+   transition-duration 0.3s
+   transition-property transform
+   transition-timing-function ease
+   &:active
+      transform scale(0.9)
