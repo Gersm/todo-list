@@ -2,14 +2,19 @@
 document.addEventListener('DOMContentLoaded', function(){
 
    // Declaracion de Variables
-   var $btnAdd = document.querySelector('#btnAdd'), $ulList, $inputText;
-   var $btnAll = document.querySelector('#btnAll'), $ulList, $inputText;
+   var $btnAll = document.querySelector('#btnAll');
+   var $btnTodo = document.querySelector('#btnTodo');
+   var $btnDone = document.querySelector('#btnDone');
 
-   actualizarVariables();
-   function actualizarVariables(){
-      $ulList = document.querySelector('#Listado__ul');
+   var $btnAdd = document.querySelector('#btnAdd');
+   var $listadoUL = document.querySelector('#Listado__ul');
+   var $inputText, $lis;
+
+   actualizarInputText();
+   function actualizarInputText(){
       $inputText = document.querySelector('#inputText');
-   }
+   };
+
 
    // Click al btnAdd
    $btnAdd.addEventListener("click", agregarLi);
@@ -21,12 +26,13 @@ document.addEventListener('DOMContentLoaded', function(){
       }
    });
 
+
    function agregarLi(){
       // Capturar el texto del input
-      actualizarVariables();
+      actualizarInputText();
 
       // escribir dentro de un <li>
-      $ulList.innerHTML = $ulList.innerHTML + '<li class="activo">' + $inputText.value + '</li>';
+      $listadoUL.innerHTML = $listadoUL.innerHTML + '<li class="activo">' + $inputText.value + '</li>';
 
       // Agregar click a los li
       agregarTodosLi();
@@ -37,9 +43,11 @@ document.addEventListener('DOMContentLoaded', function(){
       // focalizar en el inputs
       $inputText.focus();
 
+      // guardar los <li> como string
+      $lis = String($listadoUL.innerHTML);
 
       function agregarTodosLi(){
-         var tmp = document.querySelectorAll('#Listado__ul > li');
+         var tmp = $listadoUL.querySelectorAll('li');
          var tmpLength = tmp.length - 1;
 
          for (var i = 0; i <= tmpLength; i++) {
@@ -56,43 +64,91 @@ document.addEventListener('DOMContentLoaded', function(){
       };
    };
 
-   $btnAll.addEventListener("click", filtrarLi);
 
-   function filtrarLi(){
-      var $lis;
-      var $lisCant;
-      var $lisJson = {
-         "activo" : [],
-         "tachado" : []
-      };
 
+   var $lisCant;
+   var $lisJson = [];
+
+   $btnAll.addEventListener("click", filtrarAll);
+   $btnTodo.addEventListener("click", filtrarTodo);
+   $btnDone.addEventListener("click", filtrarDone);
+
+   function filtrarAll(){
+      filtrarLi('all');
+   }
+
+   function filtrarTodo(){
+      filtrarLi('activo');
+   }
+
+   function filtrarDone(){
+      filtrarLi('tachado');
+   }
+
+   function filtrarLi($filtro){
 
       // Leer todos los <li>
       leerLi();
 
       // // Guardar los <li> en formato Json
-      // guardarLi();
-      //
+      guardarLi();
+
       // // Limpiar el <ul>
-      // limpiarUl();
-      //
+      $listadoUL.innerHTML = "";
+
       // // Agregar los <li> correspondientes
-      // agregarLi();
+      agregarLi($filtro);
 
-
+// AQUI ME QUEDEEEEEEEEEE------------------------------------------
       function leerLi(){
-         // actualizarVariables();
-         $lis = document.querySelectorAll('#Listado__ul > li');
-         $lisCant = $lis.length - 1;
+         // $lisActivo = $listadoUL.querySelectorAll('.activo');
+         // $lisTachado = $listadoUL.querySelectorAll('.tachado');
+         var $longitud = $listadoUL.querySelectorAll('li').length;
 
-         for (var i = 0; i <= $lisCant; i++) {
-            // if ($lis[i].getElementsByClassName('className')) {
-            //
-            // }
+         for (var i = 0; i < $longitud; i++) {
+            var elementoI = leerElemento('');
+            var elementoT = leerElemento('tachado');
+            $lisJson[i] = {};
 
-            $lisJson['activo'][i] = $lis[i].innerText;
+            if (elementoI == null) {
+               $lisJson[i]['estado'] = 'activo';
+            } else {
+               $lisJson[i]['estado'] = 'tachado';
+            }
+
+            function leerElemento($tmp){
+               return $listadoUL.querySelector('li:nth-child(' + i+1 + ')' + $tmp);
+            }
          }
-         console.log($lisJson);
+
+      }
+
+      function guardarLi(){
+         $lisCant = $lisActivo.length - 1;
+         for (var i = 0; i <= $lisCant; i++) {
+            $lisJson['activo'][i] = $lisActivo[i].innerText;
+         }
+
+         $lisCant = $lisTachado.length - 1;
+         for (var i = 0; i <= $lisCant; i++) {
+            $lisJson['tachado'][i] = $lisTachado[i].innerText;
+         }
+      }
+
+      function agregarLi($filtro) {
+         // Dependiendo del filtro
+         if ($filtro == 'all') {
+            $listadoUL.innerHTML = $lis;
+         } else {
+            agregar($filtro)
+         }
+
+         function agregar($estado){
+            var $cantidad = $lisJson[$estado].length - 1;
+            for (var i = 0; i <= $cantidad; i++) {
+               $listadoUL.innerHTML = '<li class="' + $estado + '">' + $lisJson[$estado][i] + '</li>'
+            }
+         }
       }
    }
 });
