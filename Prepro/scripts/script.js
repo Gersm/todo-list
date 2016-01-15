@@ -1,17 +1,27 @@
+var temporal;
 // Evento que se ejecuta una ves que el DOM este cargado
 document.addEventListener('DOMContentLoaded', function(){
+
+   var $lisJson = JSON.parse(localStorage.getItem('lisJson'));
 
    // Agregar nuevos <li>
    var $listadoUL = document.querySelector('#Listado__ul');
    var $inputText = document.querySelector('#inputText');
    var $btnAdd = document.querySelector('#btnAdd');
    var $nunLi = 0;
-   var $lisJson = [];
 
    // btnFiltros
    var $btnAll = document.querySelector('#btnAll');
    var $btnTodo = document.querySelector('#btnTodo');
    var $btnDone = document.querySelector('#btnDone');
+
+   temporal = $lisJson;
+
+   if ($lisJson != null) {
+      filtrarLi('all');
+   } else {
+      $lisJson = [];
+   }
 
 
    // Eventos Agregar el nuevo li
@@ -49,6 +59,9 @@ document.addEventListener('DOMContentLoaded', function(){
       // 6- focalizar en el input
       $inputText.focus();
 
+      // 7- Guardar en el localStorage
+      localStorage.setItem('lisJson', JSON.stringify($lisJson));
+
 
       // Agregar o quitar las clases "activado" y "tachado"
       function agregarToggle(){
@@ -72,6 +85,10 @@ document.addEventListener('DOMContentLoaded', function(){
                } else {
                   $lisJson[$posicion].estado = 'tachado';
                }
+
+
+               //guardar el localStorage
+               localStorage.setItem('lisJson', JSON.stringify($lisJson));
             });
          }
       }
@@ -105,6 +122,7 @@ document.addEventListener('DOMContentLoaded', function(){
    function filtrarLi($filtro){
       // // Limpiar el <ul>
       $listadoUL.innerHTML = "";
+      $nunLi = 0;
 
       var $cant = $lisJson.length;
       for (var $i = 0; $i < $cant; $i++) {
@@ -119,7 +137,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
       // // Agregar los <li> correspondientes
       function agregar(){
-         $listadoUL.innerHTML += '<li class="' + $lisJson[$i].estado + '">' + $lisJson[$i].contenido + '</li>';
+         $listadoUL.innerHTML += '<li class="' + $lisJson[$i].estado + '" indice="' + $nunLi + '">' + $lisJson[$i].contenido + '</li>';
+         $nunLi++
       }
    }
 });
