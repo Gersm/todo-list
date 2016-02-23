@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 
-// Componente Contenedor
+// Componente Saludo
 // =============================================================
-export class Saludo extends Component{
+export class Salute extends Component{
    constructor(props) {
       super(props);
       this.state = {
-         texto: '¡¡¡ Hello World !!!'
+         texto: 'Hola Gersom! Que tienes que hacer hoy?'
       };
    }
    render(){
       return (
-         <div id="saludo">
+         <div id="salute">
             <h3>
                { this.state.texto }
             </h3>

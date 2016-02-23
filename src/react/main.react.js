@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Saludo } from './saludo';
+import { Contenido } from './contenido/contenedor.react.js';
 
 
 // Renderizacion de componentes
 // =============================================================
 render(
-   <Saludo />,
-   document.querySelector('#container')
+   <Contenido />,
+   document.querySelector('#contenido')
 );
