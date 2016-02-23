@@ -1,0 +1,17 @@
+{
+   "id": "lista1",
+   "titulo": "prueba",
+   "descipcion": "Esto es una prueba",
+   "items": [
+      {
+         "id": "item1",
+         "descripcion": "item1",
+         "estado": "porhacer"
+      },
+      {
+         "id": "item2",
+         "descripcion": "item2",
+         "estado": "hecho"
+      }
+   ]
+}

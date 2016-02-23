@@ -2,19 +2,15 @@ import React, { Component } from 'react';
 
 // Componente Saludo
 // =============================================================
-export class Salute extends Component{
+export class Saludo extends Component{
    constructor(props) {
       super(props);
-      this.state = {
-         texto: 'Hola Gersom! Que tienes que hacer hoy?'
-      };
    }
    render(){
       return (
-         <div id="salute">
-            <h3>
-               { this.state.texto }
-            </h3>
+         <div>
+            <h3>{ this.props.hola }</h3>
+            <p>{ this.props.descripcion }</p>
          </div>
       );
    }

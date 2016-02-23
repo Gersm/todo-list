@@ -1,9 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Contenido } from './contenido/contenedor.react.js';
+import { Contenido } from './contenido.react.js';
 
 
-// Renderizacion de componentes
+// Renderizacion de componentes - RAIZ
 // =============================================================
 render(
    <Contenido />,
