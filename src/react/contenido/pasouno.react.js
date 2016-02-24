@@ -15,8 +15,8 @@ export class Pasouno extends Component{
                hola={this.props.hola}
                descripcion={this.props.descripcion}
             />
-            <Intitulo
-            />
+            {/*<Intitulo
+            />*/}
          </div>
       );
    }
